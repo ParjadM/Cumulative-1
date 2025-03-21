@@ -1,6 +1,0 @@
-@Quesetion3_HostAddress = http://localhost:5218
-
-GET {{Quesetion3_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
