@@ -50,6 +50,15 @@
         "tags": [
           "CourseAPI"
         ],
+        "parameters": [
+          {
+            "name": "SearchKey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -128,6 +137,15 @@
         "tags": [
           "StudentAPI"
         ],
+        "parameters": [
+          {
+            "name": "SearchKey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -205,6 +223,15 @@
       "get": {
         "tags": [
           "TeacherAPI"
+        ],
+        "parameters": [
+          {
+            "name": "SearchKey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {

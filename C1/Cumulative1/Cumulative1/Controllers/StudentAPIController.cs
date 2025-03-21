@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Cumulative1.Model;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 namespace Cumulative1.Controllers
 {
     [Route("api/Student")]
@@ -70,17 +71,31 @@ namespace Cumulative1.Controllers
         /// </returns>
         [HttpGet]
         [Route("ListStudents")]
-        public List<Student> ListStudents()
+        public List<Student> ListStudents(string SearchKey = null)
         {
             // Create an empty list of students
             List<Student> students = new List<Student>();
 
-            // 'using' ensures the connection is properly closed after use
+            
             using (MySqlConnection connection = _context.AccessDatabase())
             {
                 connection.Open();
-                MySqlCommand command =connection.CreateCommand();
-                command.CommandText = "SELECT * FROM Students";
+                MySqlCommand command = connection.CreateCommand();
+                //command.CommandText = "SELECT * FROM students";
+
+                string query = "SELECT * FROM students";
+
+                //searh criteria
+                if (SearchKey != null)
+                {
+                    query += " where lower(studentfname) like lower(@key) or lower(studentlname) like lower(@key) or lower(concat(studentfname,' ',studentlname)) like lower(@key) ";
+                    command.Parameters.AddWithValue("@key", $"%{SearchKey}%");
+                }
+                Debug.WriteLine($"SearchKey: {SearchKey}");
+
+                command.CommandText = query;
+                command.Prepare();
+                Debug.WriteLine(query);
 
                 using (MySqlDataReader resultSet= command.ExecuteReader())
                 {

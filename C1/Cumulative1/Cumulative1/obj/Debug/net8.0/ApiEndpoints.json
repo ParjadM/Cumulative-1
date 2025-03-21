@@ -32,7 +32,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "SearchKey",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[Cumulative1.Model.Course, Cumulative1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -78,7 +84,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "SearchKey",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[Cumulative1.Model.Student, Cumulative1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -124,7 +136,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "SearchKey",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[Cumulative1.Model.Teacher, Cumulative1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",

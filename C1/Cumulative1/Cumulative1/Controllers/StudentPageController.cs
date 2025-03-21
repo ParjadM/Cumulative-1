@@ -18,10 +18,10 @@ namespace Cumulative1.Controllers
         /// Displays a list of Students on a dynamic page.
         /// </summary>
         /// <returns>A view containing all Students.</returns>
-        public IActionResult List()
+        public IActionResult List(string SearchKey)
         {
             
-            List<Student> Students = _api.ListStudents();
+            List<Student> Students = _api.ListStudents(SearchKey);
 
             
             return View("~/Views/Student/List.cshtml", Students);

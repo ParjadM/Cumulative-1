@@ -12,26 +12,24 @@
         font-family: Arial;
         background-color: #C5BAFF;
     }
+    #btn {
+        background-color: green;
+        color: white;
+    }
 </style>
 <h1>Teacher Directory</h1>
 
 <div>
-    <input type="number" id="search" placeholder="Search" />
-    <button id="SearchButton">Search</button>
-    @foreach (var teacher in Model)
+    <form method="GET" action="/TeacherPage/List">
+        <div>
+            <input type="text" name="SearchKey"/>
+            <input type="submit" id="btn" value="Search"/>
+        </div>    
+    </form>
+    @foreach (var Teacher in Model)
     {
         <div>
-            (@teacher.Id)
-            <a href="/TeacherPage/Show/@teacher.Id">
-                <strong>@teacher.Name</strong>
-            </a>
+            (@Teacher.Id) <a href="/TeacherPage/Show/@Teacher.Id">@Teacher.Name</a>
         </div>
     }
 </div>
-<script>
-    var searchButton = document.getElementById("SearchButton");
-    searchButton.addEventListener("click", function () {
-        var search = document.getElementById("search").value;
-        window.location.href = "/TeacherPage/Show/" + search;
-    });
-</script>

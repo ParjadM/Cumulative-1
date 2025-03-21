@@ -18,10 +18,10 @@ namespace Cumulative1.Controllers
         /// Displays a list of Courses on a dynamic page.
         /// </summary>
         /// <returns>A view containing all Courses.</returns>
-        public IActionResult List()
+        public IActionResult List(string SearchKey)
         {
             
-            List<Course> Courses = _api.ListCourses();
+            List<Course> Courses = _api.ListCourses(SearchKey);
             return View("~/Views/Course/List.cshtml", Courses);
         }
 

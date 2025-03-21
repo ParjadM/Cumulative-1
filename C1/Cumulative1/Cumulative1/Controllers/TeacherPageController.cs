@@ -15,9 +15,9 @@ namespace Cumulative1.Controllers
         /// Displays a list of teachers on a dynamic page.
         /// </summary>
         /// <returns>A view containing all teachers.</returns>
-        public IActionResult List()
+        public IActionResult List(string SearchKey)
         {
-            List<Teacher> Teachers =_api.ListTeachers();
+            List<Teacher> Teachers =_api.ListTeachers(SearchKey);
             return View("~/Views/Teacher/List.cshtml", Teachers);
         }
 

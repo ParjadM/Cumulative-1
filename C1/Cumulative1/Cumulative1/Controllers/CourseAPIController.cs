@@ -4,6 +4,7 @@ using Cumulative1.Model;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Cumulative1.Controllers
 {
@@ -76,7 +77,7 @@ namespace Cumulative1.Controllers
         /// </returns>
         [HttpGet]
         [Route("ListCourses")]
-        public List<Course> ListCourses()
+        public List<Course> ListCourses(string SearchKey = null)
         {
             // Create an empty list of courses
             List<Course>courses = new List<Course>();
@@ -84,8 +85,22 @@ namespace Cumulative1.Controllers
             using (MySqlConnection connection= _context.AccessDatabase())
             {
                 connection.Open();
-                MySqlCommand command= connection.CreateCommand();
-                command.CommandText = "SELECT * FROM Courses";
+                MySqlCommand command = connection.CreateCommand();
+                //command.CommandText = "SELECT * FROM courses";
+
+                string query = "SELECT * FROM courses";
+
+                //searh criteria
+                if (SearchKey != null)
+                {
+                    query += " where lower(coursename) like lower(@key)";
+                    command.Parameters.AddWithValue("@key", $"%{SearchKey}%");
+                }
+                Debug.WriteLine($"SearchKey: {SearchKey}");
+
+                command.CommandText = query;
+                command.Prepare();
+                Debug.WriteLine(query);
 
                 using (MySqlDataReader resultSet = command.ExecuteReader())
                 {

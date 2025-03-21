@@ -5,6 +5,7 @@ using Cumulative1.Models;
 using System;
 using System.Collections.Generic;
 using Cumulative1.Model;
+using System.Diagnostics;
 
 namespace Cumulative1.Controllers
 {
@@ -74,7 +75,7 @@ namespace Cumulative1.Controllers
         /// </returns>
         [HttpGet]
         [Route("ListTeachers")]
-        public List<Teacher> ListTeachers()
+        public List<Teacher> ListTeachers(string SearchKey = null)
         {
             // Create an empty list of teachers
             List<Teacher> teachers = new List<Teacher>();
@@ -83,7 +84,22 @@ namespace Cumulative1.Controllers
             {
                 connection.Open();
                 MySqlCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM teachers";
+                //command.CommandText = "SELECT * FROM teachers";
+
+                string query = "SELECT * FROM teachers";
+
+                //searh criteria
+                if (SearchKey != null)
+                {
+                    query += " where lower(teacherfname) like lower(@key) or lower(teacherlname) like lower(@key) or lower(concat(teacherfname,' ',teacherlname)) like lower(@key) ";
+                    command.Parameters.AddWithValue("@key", $"%{SearchKey}%");
+                }
+                Debug.WriteLine($"SearchKey: {SearchKey}");
+
+                command.CommandText = query;
+                command.Prepare();
+                Debug.WriteLine(query);
+
 
                 using (MySqlDataReader resultSet = command.ExecuteReader())
                 {
