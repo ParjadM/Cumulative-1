@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Cumulative1.Model.Course>
+<style>
+    h1 {
+        color: #C4D9FF;
+    }
+    div {
+        border: 1px solid black;
+    }
+    body {
+        font-family: Arial;
+        background-color: #C5BAFF;
+    }
+</style>
+<h1>Course Directory</h1>
+<div>
+    <input type="number" id="search" placeholder="Search" />
+    <button id="SearchButton">Search</button>
+    @foreach (var Course in Model)
+    {
+        <div>
+            (@Course.Id)
+            <a href="/CoursePage/Show/@Course.Id">
+                <strong>@Course.Coursecode</strong>
+            </a>
+        </div>
+    }
+</div>
+<script>
+    var searchButton = document.getElementById("SearchButton");
+    searchButton.addEventListener("click", function () {
+        var search = document.getElementById("search").value;
+        window.location.href = "/CoursePage/Show/" + search;
+    });
+</script>

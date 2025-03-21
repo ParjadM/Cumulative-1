@@ -1,0 +1,39 @@
+﻿@model Cumulative1.Model.Course
+
+@{
+    ViewData["Title"] = "Course Details";
+}
+<style>
+    h1 {
+        color: #C4D9FF;
+    }
+
+    div {
+        border: 1px solid black;
+    }
+
+    body {
+        font-family: Arial;
+        background-color: #C5BAFF;
+    }
+</style>
+<h1>Show Details</h1>
+
+@if (Model != null)
+{
+    <div>
+        <h2>Name: @(Model.Name ?? "Unknown") </h2>
+        <p><strong>Teacher Id:</strong> @(Model.Teacherid)</p>
+        <p><strong>Start Date:</strong> @(Model.Startdate?.ToString("yyyy-MM-dd") ?? "Not Available")</p>
+        <p><strong>Finish Date:</strong> @(Model.Finishdate?.ToString("yyyy-MM-dd") ?? "Not Available")</p>
+        <p><strong>Course Code:</strong> @(Model.Coursecode ?? "Not Available")</p>
+        
+    </div>
+    <a asp-action="List" asp-controller="CoursePage">
+        Back to Course List
+    </a>
+}
+else
+{
+    <p>Course not found.</p>
+}

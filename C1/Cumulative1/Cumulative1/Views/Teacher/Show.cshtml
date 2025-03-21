@@ -1,0 +1,36 @@
+﻿@model Cumulative1.Model.Teacher 
+
+@{
+    ViewData["Title"] = "Teacher Details";
+}
+<style>
+    h1 {
+        color: #C4D9FF;
+    }
+
+    div {
+        border: 1px solid black;
+    }
+
+    body {
+        font-family: Arial;
+        background-color: #C5BAFF;
+    }
+</style>
+<h1>Show Details</h1>
+
+@if (Model != null) 
+{
+    <div>
+        <h2>Name: @(Model.Name ?? "Unknown") </h2>
+        <p><strong>Hire Date:</strong> @(Model.HireDate?.ToString("yyyy-MM-dd") ?? "Not Available")</p>
+        <p><strong>Employee Number:</strong> @(Model.EmployeeNumber ?? "Not Available")</p>
+    </div>
+    <a asp-action="List" asp-controller="TeacherPage">
+        Back to Teacher List
+    </a>
+}
+else
+{
+    <p>Teacher not found.</p>
+}
